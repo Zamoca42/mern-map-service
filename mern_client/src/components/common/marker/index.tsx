@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./Marker.css";
+import "./marker.css";
 
 interface MarkerProps {
   map: naver.maps.Map;
