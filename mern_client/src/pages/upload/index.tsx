@@ -1,7 +1,26 @@
-import React from "react";
+import { useSetAtom } from "jotai";
+import { useEffect } from "react";
+import { infosAtom, selectInfoAtom } from "../../atoms/info";
+import MapContainer from "../../components/MapContainer";
+import MarkersContainer from "../../components/MarkersContainer";
+import Navigation from "../../components/Navigation";
 
 function Upload() {
-  return <div>Upload</div>;
+  const setInfos = useSetAtom(infosAtom);
+  const setSelectInfo = useSetAtom(selectInfoAtom);
+
+  useEffect(() => {
+    setInfos(null);
+    setSelectInfo(null);
+  }, []);
+
+  return (
+    <>
+      <Navigation type="upload" />
+      <MapContainer />
+      <MarkersContainer />
+    </>
+  );
 }
 
 export default Upload;
