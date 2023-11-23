@@ -10,6 +10,7 @@ import { selectAtom } from "../atoms/search";
 import { FiArrowLeft } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
 import Input from "./common/Input";
+import useInput from "../hooks/useInput";
 
 interface NavigationProps {
   type?: "home" | "upload";
@@ -17,10 +18,15 @@ interface NavigationProps {
 
 function Navigation({ type = "home" }: NavigationProps) {
   const [select, setSelect] = useAtom(selectAtom);
+  const { value, onChange } = useInput("");
 
   const onChangeSelect = useCallback(() => {
     setSelect(!select);
   }, [select, setSelect]);
+
+  const onSubmit = useCallback(() => {
+    console.log(value);
+  }, [value]);
 
   return (
     <ShadowBox>
@@ -35,7 +41,7 @@ function Navigation({ type = "home" }: NavigationProps) {
       )}
       <Divider />
       {select ? (
-        <Input />
+        <Input value={value} onChange={onChange} onSubmit={onSubmit} />
       ) : (
         <Block
           height="28px"
@@ -43,7 +49,7 @@ function Navigation({ type = "home" }: NavigationProps) {
         />
       )}
       {type === "upload" ? (
-        <Button onClick={onChangeSelect}>
+        <Button onClick={select ? onSubmit : onChangeSelect}>
           <BiSearch size={20} />
         </Button>
       ) : (
