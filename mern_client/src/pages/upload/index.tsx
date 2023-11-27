@@ -4,6 +4,7 @@ import { infosAtom, selectInfoAtom } from "../../atoms/info";
 import MapContainer from "../../components/MapContainer";
 import MarkersContainer from "../../components/MarkersContainer";
 import Navigation from "../../components/Navigation";
+import SearchBoard from "../../components/SearchBoard";
 
 function Upload() {
   const setInfos = useSetAtom(infosAtom);
@@ -19,6 +20,7 @@ function Upload() {
       <Navigation type="upload" />
       <MapContainer />
       <MarkersContainer />
+      <SearchBoard />
     </>
   );
 }
