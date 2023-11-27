@@ -14,11 +14,41 @@ const StyledSearchBoard = styled.div`
   background: #ffffff;
   top: 0px;
   padding: 74px 16px 16px 16px;
+
+  .search_board_wrap {
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .no_result {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `;
 
 function SearchBoard() {
   const [select, setSelect] = useAtom(selectAtom);
-  return <>{select && <StyledSearchBoard></StyledSearchBoard>}</>;
+  const infos = useAtomValue(infosAtom);
+
+  return (
+    <>
+      {select && (
+        <StyledSearchBoard>
+          <div className="search_board_wrap">
+            {infos && infos.length !== 0 ? (
+              infos.map((info: Info) => (
+                <ResultBox key={info.id} info={info} onClick={(info) => {}} />
+              ))
+            ) : (
+              <div className="no_result">검색 결과가 없습니다.</div>
+            )}
+          </div>
+        </StyledSearchBoard>
+      )}
+    </>
+  );
 }
 
 export default SearchBoard;
