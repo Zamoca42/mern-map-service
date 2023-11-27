@@ -31,6 +31,15 @@ const StyledSearchBoard = styled.div`
 function SearchBoard() {
   const [select, setSelect] = useAtom(selectAtom);
   const infos = useAtomValue(infosAtom);
+  const setSelectInfo = useSetAtom(selectInfoAtom);
+
+  const onClickResultBox = useCallback(
+    (info: Info) => {
+      setSelectInfo(info);
+      setSelect(!select);
+    },
+    [select, setSelect, setSelectInfo]
+  );
 
   return (
     <>
@@ -39,7 +48,11 @@ function SearchBoard() {
           <div className="search_board_wrap">
             {infos && infos.length !== 0 ? (
               infos.map((info: Info) => (
-                <ResultBox key={info.id} info={info} onClick={(info) => {}} />
+                <ResultBox
+                  key={info.id}
+                  info={info}
+                  onClick={onClickResultBox}
+                />
               ))
             ) : (
               <div className="no_result">검색 결과가 없습니다.</div>

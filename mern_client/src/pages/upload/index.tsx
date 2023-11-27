@@ -19,7 +19,7 @@ function Upload() {
     <>
       <Navigation type="upload" />
       <MapContainer />
-      <MarkersContainer />
+      <MarkersContainer type="upload" />
       <SearchBoard />
     </>
   );
