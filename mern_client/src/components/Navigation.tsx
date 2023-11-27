@@ -5,12 +5,14 @@ import Span from "./common/Span";
 import Divider from "./common/Divider";
 import Block from "./common/Block";
 import { GoPlus } from "react-icons/go";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { selectAtom } from "../atoms/search";
 import { FiArrowLeft } from "react-icons/fi";
 import { BiSearch } from "react-icons/bi";
 import Input from "./common/Input";
 import useInput from "../hooks/useInput";
+import { infosAtom, selectInfoAtom } from "../atoms/info";
+import { infos } from "../data/info";
 
 interface NavigationProps {
   type?: "home" | "upload";
@@ -19,14 +21,16 @@ interface NavigationProps {
 function Navigation({ type = "home" }: NavigationProps) {
   const [select, setSelect] = useAtom(selectAtom);
   const { value, onChange } = useInput("");
+  const setInfos = useSetAtom(infosAtom);
+  const setSelectInfo = useSetAtom(selectInfoAtom);
 
   const onChangeSelect = useCallback(() => {
     setSelect(!select);
   }, [select, setSelect]);
 
   const onSubmit = useCallback(() => {
-    console.log(value);
-  }, [value]);
+    setInfos(infos);
+  }, []);
 
   return (
     <ShadowBox>
