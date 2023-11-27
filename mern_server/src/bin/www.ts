@@ -7,6 +7,7 @@ import app from '../app';
 import debug from 'debug';
 
 import http from 'http';
+import mongoose from 'mongoose';
 
 /**
  * Get port from environment and store in Express.
@@ -15,6 +16,14 @@ import http from 'http';
 const port = normalizePort('3001');
 app.set('port', port);
 
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
+
+mongoose
+  .connect(
+    `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authMechanism=DEFAULT&authSource=admin`
+  )
+  .then(() => console.log('Connected to mongo server'))
+  .catch((e) => console.log(e));
 /**
  * Create HTTP server.
  */
